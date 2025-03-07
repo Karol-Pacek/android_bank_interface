@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">NegroBP</string>
+    <string name="login">Logowanie</string>
+    <string name="login_button">Zaloguj się</string>
+</resources>

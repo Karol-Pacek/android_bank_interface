@@ -6,13 +6,16 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:logo="@drawable/logo"
         android:icon="@mipmap/ic_launcher_negro"
         android:label="@string/app_name"
+        android:logo="@drawable/logo"
         android:roundIcon="@mipmap/ic_launcher_negro"
         android:supportsRtl="true"
         android:theme="@style/Theme.BankApp"
         tools:targetApi="31">
+        <activity
+            android:name=".Blik"
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -24,8 +27,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>

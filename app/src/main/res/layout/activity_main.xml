@@ -31,7 +31,13 @@
         android:orientation="horizontal"
         android:layout_gravity="center">
 
-
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="108dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/button_bg"
+        android:layout_weight="1"
+        android:id="@+id/blik_button"/>
     <Button
         android:layout_width="70dp"
         android:layout_height="108dp"
@@ -44,12 +50,5 @@
         android:layout_margin="15dp"
         android:background="@drawable/button_bg"
         android:layout_weight="1"/>
-    <Button
-        android:layout_width="70dp"
-        android:layout_height="108dp"
-        android:layout_margin="15dp"
-        android:background="@drawable/button_bg"
-        android:layout_weight="1"/>
-</LinearLayout>
-
+    </LinearLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>

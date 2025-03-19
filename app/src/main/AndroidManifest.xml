@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_negro"
         android:supportsRtl="true"
         android:theme="@style/Theme.BankApp"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
             android:name=".BlikActivity"

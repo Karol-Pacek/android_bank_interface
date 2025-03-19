@@ -12,6 +12,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+
 public class MainActivity extends AppCompatActivity {
  Button btn;
     @Override
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Toast.makeText(MainActivity.this, "Przekierowywanie...", Toast.LENGTH_SHORT).show();
+
                     startActivity(intent);
                 }
         });

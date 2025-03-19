@@ -49,5 +49,6 @@ public class BlikActivity extends AppCompatActivity {
                 Toast.makeText(BlikActivity.this, "Skopiowano kod", Toast.LENGTH_SHORT).show();
             }
         });
+        new VolleyController().tempName(this);
     }
 }

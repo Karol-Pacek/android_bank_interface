@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
                 });
 
             btn = findViewById(R.id.blik_button);
-            Intent intent = new Intent(this, Blik.class);
+            Intent intent = new Intent(this, BlikActivity.class);
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

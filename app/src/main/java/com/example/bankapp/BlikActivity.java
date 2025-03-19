@@ -16,7 +16,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class Blik extends AppCompatActivity {
+public class BlikActivity extends AppCompatActivity {
     Button btnCopy;
     TextView blikCode;
 
@@ -46,7 +46,7 @@ public class Blik extends AppCompatActivity {
                 ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                 ClipData clip = ClipData.newPlainText("BLIK Code", blikCode.getText().toString());
                 clipboard.setPrimaryClip(clip);
-                Toast.makeText(Blik.this, "Skopiowano kod", Toast.LENGTH_SHORT).show();
+                Toast.makeText(BlikActivity.this, "Skopiowano kod", Toast.LENGTH_SHORT).show();
             }
         });
     }

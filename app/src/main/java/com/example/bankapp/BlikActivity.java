@@ -38,7 +38,7 @@ public class BlikActivity extends AppCompatActivity {
         blikCode = findViewById(R.id.blik_code);
         btnCopy = findViewById(R.id.copy_blik_code);
 
-
+        new VolleyController().changeText(this,blikCode);
 
         btnCopy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +49,5 @@ public class BlikActivity extends AppCompatActivity {
                 Toast.makeText(BlikActivity.this, "Skopiowano kod", Toast.LENGTH_SHORT).show();
             }
         });
-        new VolleyController().tempName(this);
     }
 }

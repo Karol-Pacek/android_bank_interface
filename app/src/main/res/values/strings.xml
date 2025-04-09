@@ -2,6 +2,6 @@
     <string name="app_name">NegroBP</string>
     <string name="login">Logowanie</string>
     <string name="login_button">Zaloguj się</string>
-    <string name="blik_code">692137</string>
+    <string name="blik_code">%1$s</string>
     <string name="blik_butoon">Skopiuj do schowka</string>
 </resources>

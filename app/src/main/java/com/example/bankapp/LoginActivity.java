@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(LoginActivity.this, "Przekierowywanie...", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(LoginActivity.this, "Przekierowywanie...", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });

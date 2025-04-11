@@ -38,7 +38,7 @@ public class BlikActivity extends AppCompatActivity {
         blikCode = findViewById(R.id.blik_code);
         btnCopy = findViewById(R.id.copy_blik_code);
 
-        new VolleyController().changeText(this,blikCode);
+        new VolleyController().checkBlik(this,blikCode);
 
         btnCopy.setOnClickListener(new View.OnClickListener() {
             @Override

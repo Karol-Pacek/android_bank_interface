@@ -12,24 +12,52 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <TextView
-            android:layout_width="match_parent"
             android:id="@+id/blik_code"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/blik_code"
-            android:textSize="50dp"
             android:textAlignment="center"
-            android:textStyle="bold"/>
+            android:textSize="50dp"
+            android:textStyle="bold"
+            android:textColor="@color/darkerRed"/>
+
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ProgressBar
+                android:id="@+id/determinateBar"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:progressTint="@color/darkerRed"
+                android:progressBackgroundTint="@color/gray"
+                android:progress="25"
+                android:min="0"
+                android:max="120"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/blik_progress_timer"
+                android:textColor="@color/darkerRed"
+                android:paddingLeft="5dp"/>
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/copy_blik_code"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:text="@string/blik_butoon" />
-
-
 
 
     </LinearLayout>

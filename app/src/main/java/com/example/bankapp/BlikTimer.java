@@ -5,32 +5,27 @@ import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Toast;
 
-public class BlikTimer extends Activity {
+public class BlikTimer {
 
+    Context con;
     Timer timer;
     TimerTask timerTask;
 
     //we are going to use a handler to be able to run in our TimerTask
     final Handler handler = new Handler();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
-
-    @Override
+    /*@Override
     protected void onResume() {
         super.onResume();
 
-        //onResume we start our timer so it can start when the app comes from the background
         startTimer();
-    }
+    }*/
 
     public void startTimer() {
         //set a new Timer
@@ -39,12 +34,11 @@ public class BlikTimer extends Activity {
         //initialize the TimerTask's job
         initializeTimerTask();
 
-        //schedule the timer, after the first 5000ms the TimerTask will run every 10000ms
-        timer.schedule(timerTask, 5000, 10000); //
+        //schedule the timer, after the first 1000ms the TimerTask will run every 1000ms
+        timer.schedule(timerTask, 1000, 1000);
     }
 
     public void stoptimertask(View v) {
-        //stop the timer, if it's not already null
         if (timer != null) {
             timer.cancel();
             timer = null;
@@ -55,19 +49,9 @@ public class BlikTimer extends Activity {
 
         timerTask = new TimerTask() {
             public void run() {
-
-                //use a handler to run a toast that shows the current timestamp
                 handler.post(new Runnable() {
                     public void run() {
-                        //get the current timeStamp
-                        Calendar calendar = Calendar.getInstance();
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd:MMMM:yyyy HH:mm:ss a");
-                        final String strDate = simpleDateFormat.format(calendar.getTime());
 
-                        //show the toast
-                        int duration = Toast.LENGTH_SHORT;
-                        Toast toast = Toast.makeText(getApplicationContext(), strDate, duration);
-                        toast.show();
                     }
                 });
             }

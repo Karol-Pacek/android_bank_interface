@@ -18,9 +18,11 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
+import java.util.Date;
+
 public class VolleyController {
 
-    public void tempName(Context con) {
+    /*public void tempName(Context con) {
         RequestQueue queue = Volley.newRequestQueue(con);
         String url ="http://192.168.0.114:8080/generate-blik/123435634645564";
 
@@ -40,11 +42,11 @@ public class VolleyController {
                     }
                 });
         queue.add(stringRequest);
-    }
+    }*/
 
     public void checkBlik(Context con, TextView view) {
         RequestQueue queue = Volley.newRequestQueue(con);
-        String url ="http://192.168.0.114:8080/check-blik/1";
+        String url ="http://192.168.189.104:8080/check-blik/1";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -54,9 +56,11 @@ public class VolleyController {
                             Gson gson = new Gson();
                             Blik blikData = gson.fromJson(response.toString(), Blik.class);
 
-                            if(blikData == null) {
+                            if(blikData.blik_code == -1) {
                                 generateBlik(con,view);
-                            }else {
+                            } else if (blikData.expiration.before(new Date())) {
+                                updateBlik(con,view);
+                            } else {
                                 view.setText(String.valueOf(blikData.blik_code));
                             }
 
@@ -79,7 +83,7 @@ public class VolleyController {
 
     public void generateBlik(Context con, TextView view) {
         RequestQueue queue = Volley.newRequestQueue(con);
-        String url ="http://192.168.0.114:8080/generate-blik/1";
+        String url ="http://192.168.189.104:8080/generate-blik/1";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null,
                 new Response.Listener<JSONObject>() {
@@ -89,6 +93,37 @@ public class VolleyController {
                             Gson gson = new Gson();
                             Blik blikData = gson.fromJson(response.toString(), Blik.class);
 
+
+                            view.setText(String.valueOf(blikData.blik_code));
+
+                        } catch (Exception e) {
+                            Log.e("changeText", "Error parsing response", e);
+                            Toast.makeText(con, "Error processing data", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        String errorMessage = (error.getMessage() != null) ? error.getMessage() : "Unknown error occurred";
+                        Log.d("changeText", errorMessage);
+                        Toast.makeText(con, errorMessage, Toast.LENGTH_SHORT).show();
+                    }
+                });
+        queue.add(jsonObjectRequest);
+    }
+
+    public void updateBlik(Context con, TextView view) {
+        RequestQueue queue = Volley.newRequestQueue(con);
+        String url ="http://192.168.189.104:8080/update-blik/1";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Gson gson = new Gson();
+                            Blik blikData = gson.fromJson(response.toString(), Blik.class);
 
                             view.setText(String.valueOf(blikData.blik_code));
 

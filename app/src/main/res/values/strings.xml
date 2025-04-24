@@ -4,4 +4,5 @@
     <string name="login_button">Zaloguj się</string>
     <string name="blik_code">%1$s</string>
     <string name="blik_butoon">Skopiuj do schowka</string>
+    <string name="blik_progress_timer">-:--</string>
 </resources>

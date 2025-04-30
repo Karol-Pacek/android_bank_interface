@@ -18,7 +18,11 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class VolleyController {
 
@@ -44,7 +48,7 @@ public class VolleyController {
         queue.add(stringRequest);
     }*/
 
-    public void checkBlik(Context con, TextView view) {
+    public void checkBlik(Context con, TextView view, TextView timeLeft) {
         RequestQueue queue = Volley.newRequestQueue(con);
         String url ="http://192.168.189.104:8080/check-blik/1";
 
@@ -57,11 +61,16 @@ public class VolleyController {
                             Blik blikData = gson.fromJson(response.toString(), Blik.class);
 
                             if(blikData.blik_code == -1) {
-                                generateBlik(con,view);
+                                generateBlik(con,view,timeLeft);
                             } else if (blikData.expiration.before(new Date())) {
-                                updateBlik(con,view);
+                                updateBlik(con,view,timeLeft);
                             } else {
                                 view.setText(String.valueOf(blikData.blik_code));
+                                long diffInMillis = blikData.expiration.getTime() - new Date().getTime();
+
+                                long minutes = TimeUnit.MILLISECONDS.toMinutes(diffInMillis);
+                                long seconds = TimeUnit.MILLISECONDS.toSeconds(diffInMillis) % 60;
+                                Toast.makeText(con, minutes+":"+seconds, LENGTH_SHORT).show();
                             }
 
                         } catch (Exception e) {
@@ -81,7 +90,7 @@ public class VolleyController {
         queue.add(jsonObjectRequest);
     }
 
-    public void generateBlik(Context con, TextView view) {
+    public void generateBlik(Context con, TextView view, TextView timeLeft) {
         RequestQueue queue = Volley.newRequestQueue(con);
         String url ="http://192.168.189.104:8080/generate-blik/1";
 
@@ -92,7 +101,6 @@ public class VolleyController {
                         try {
                             Gson gson = new Gson();
                             Blik blikData = gson.fromJson(response.toString(), Blik.class);
-
 
                             view.setText(String.valueOf(blikData.blik_code));
 
@@ -113,7 +121,7 @@ public class VolleyController {
         queue.add(jsonObjectRequest);
     }
 
-    public void updateBlik(Context con, TextView view) {
+    public void updateBlik(Context con, TextView view, TextView timeLeft) {
         RequestQueue queue = Volley.newRequestQueue(con);
         String url ="http://192.168.189.104:8080/update-blik/1";
 

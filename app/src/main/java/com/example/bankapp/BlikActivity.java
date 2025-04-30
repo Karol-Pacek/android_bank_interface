@@ -7,6 +7,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,10 @@ import androidx.core.view.WindowInsetsCompat;
 public class BlikActivity extends AppCompatActivity {
     Button btnCopy;
     TextView blikCode;
+    ProgressBar progressBar;
+    TextView timeLeft;
+
+    BlikTimer blikTimer;
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
@@ -37,8 +42,11 @@ public class BlikActivity extends AppCompatActivity {
 
         blikCode = findViewById(R.id.blik_code);
         btnCopy = findViewById(R.id.copy_blik_code);
+        progressBar = findViewById(R.id.progress_bar);
+        timeLeft = findViewById(R.id.timer);
 
-        new VolleyController().checkBlik(this,blikCode);
+        blikTimer = new BlikTimer(this,blikCode,timeLeft);
+        blikTimer.startTimer();
 
         btnCopy.setOnClickListener(new View.OnClickListener() {
             @Override

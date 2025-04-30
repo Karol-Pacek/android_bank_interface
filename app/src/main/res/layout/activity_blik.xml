@@ -32,7 +32,7 @@
             android:orientation="horizontal">
 
             <ProgressBar
-                android:id="@+id/determinateBar"
+                android:id="@+id/progress_bar"
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="10dp"
@@ -45,6 +45,7 @@
                 android:max="120"/>
 
             <TextView
+                android:id="@+id/timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/blik_progress_timer"

@@ -2,8 +2,12 @@ package com.example.bankapp;
 
 import static android.widget.Toast.LENGTH_SHORT;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +26,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class VolleyController {
@@ -48,9 +53,9 @@ public class VolleyController {
         queue.add(stringRequest);
     }*/
 
-    public void checkBlik(Context con, TextView view, TextView timeLeft) {
+    public void checkBlik(Context con, TextView view, TextView timeLeft, ProgressBar bar) {
         RequestQueue queue = Volley.newRequestQueue(con);
-        String url ="http://192.168.189.104:8080/check-blik/1";
+        String url ="http://192.168.56.1:8080/check-blik/1";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -61,16 +66,22 @@ public class VolleyController {
                             Blik blikData = gson.fromJson(response.toString(), Blik.class);
 
                             if(blikData.blik_code == -1) {
-                                generateBlik(con,view,timeLeft);
+                                generateBlik(con);
                             } else if (blikData.expiration.before(new Date())) {
-                                updateBlik(con,view,timeLeft);
+                                updateBlik(con);
+                            } else if (!Objects.equals(blikData.getRequested(), "")) {
+                                Intent intent = new Intent(con, MainActivity.class);
+                                con.startActivity(intent);
                             } else {
                                 view.setText(String.valueOf(blikData.blik_code));
                                 long diffInMillis = blikData.expiration.getTime() - new Date().getTime();
 
                                 long minutes = TimeUnit.MILLISECONDS.toMinutes(diffInMillis);
-                                long seconds = TimeUnit.MILLISECONDS.toSeconds(diffInMillis) % 60;
-                                Toast.makeText(con, minutes+":"+seconds, LENGTH_SHORT).show();
+                                long seconds = TimeUnit.MILLISECONDS.toSeconds(diffInMillis);
+
+                                String formattedTime = con.getResources().getString(R.string.blik_progress_timer,minutes,seconds%60);
+                                timeLeft.setText(formattedTime);
+                                bar.setProgress((int) seconds);
                             }
 
                         } catch (Exception e) {
@@ -90,19 +101,19 @@ public class VolleyController {
         queue.add(jsonObjectRequest);
     }
 
-    public void generateBlik(Context con, TextView view, TextView timeLeft) {
+    public void generateBlik(Context con) {
         RequestQueue queue = Volley.newRequestQueue(con);
-        String url ="http://192.168.189.104:8080/generate-blik/1";
+        String url ="http://192.168.56.1:8080/generate-blik/1";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            Gson gson = new Gson();
+                            /*Gson gson = new Gson();
                             Blik blikData = gson.fromJson(response.toString(), Blik.class);
 
-                            view.setText(String.valueOf(blikData.blik_code));
+                            view.setText(String.valueOf(blikData.blik_code));*/
 
                         } catch (Exception e) {
                             Log.e("changeText", "Error parsing response", e);
@@ -121,19 +132,19 @@ public class VolleyController {
         queue.add(jsonObjectRequest);
     }
 
-    public void updateBlik(Context con, TextView view, TextView timeLeft) {
+    public void updateBlik(Context con) {
         RequestQueue queue = Volley.newRequestQueue(con);
-        String url ="http://192.168.189.104:8080/update-blik/1";
+        String url ="http://192.168.56.1:8080/update-blik/1";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            Gson gson = new Gson();
+                            /*Gson gson = new Gson();
                             Blik blikData = gson.fromJson(response.toString(), Blik.class);
 
-                            view.setText(String.valueOf(blikData.blik_code));
+                            view.setText(String.valueOf(blikData.blik_code));*/
 
                         } catch (Exception e) {
                             Log.e("changeText", "Error parsing response", e);

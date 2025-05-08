@@ -45,7 +45,7 @@ public class BlikActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_bar);
         timeLeft = findViewById(R.id.timer);
 
-        blikTimer = new BlikTimer(this,blikCode,timeLeft);
+        blikTimer = new BlikTimer(this,blikCode,timeLeft,progressBar);
         blikTimer.startTimer();
 
         btnCopy.setOnClickListener(new View.OnClickListener() {

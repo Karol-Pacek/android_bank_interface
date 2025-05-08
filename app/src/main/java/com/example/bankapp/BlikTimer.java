@@ -9,19 +9,23 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class BlikTimer {
 
-    public BlikTimer(Context con, TextView blikCode, TextView timeLeft) {
+    public BlikTimer(Context con, TextView blikCode, TextView timeLeft, ProgressBar progressBar) {
         this.con = con;
         this.blikCode = blikCode;
+        this.timeLeft = timeLeft;
+        this.progressBar = progressBar;
     }
 
     Context con;
     TextView blikCode;
     TextView timeLeft;
+    ProgressBar progressBar;
     Timer timer;
     TimerTask timerTask;
 
@@ -59,7 +63,7 @@ public class BlikTimer {
             public void run() {
                 handler.post(new Runnable() {
                     public void run() {
-                        new VolleyController().checkBlik(con,blikCode,timeLeft);
+                        new VolleyController().checkBlik(con,blikCode,timeLeft,progressBar);
                     }
                 });
             }

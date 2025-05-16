@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "497870184219",
+    "project_id": "changbang-e7e66",
+    "storage_bucket": "changbang-e7e66.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:497870184219:android:f4e7fd894e6b6279c53dbe",
+        "android_client_info": {
+          "package_name": "com.example.bankapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBr6NNk5p93S-nMoXlyYmLUK9ln0Iqe2vQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

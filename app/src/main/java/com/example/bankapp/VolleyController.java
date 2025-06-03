@@ -73,7 +73,7 @@ public class VolleyController {
                                 if (callback != null) {
                                     callback.onRequestDetected();
                                 }
-                                Intent intent = new Intent(con, MainActivity.class);
+                                Intent intent = new Intent(con, BlikConfirmActivity.class);
                                 con.startActivity(intent);
                             } else {
                                 view.setText(String.valueOf(blikData.blik_code));

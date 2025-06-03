@@ -22,6 +22,7 @@ public class BlikTimer {
         this.progressBar = progressBar;
     }
 
+    private OnBlikRequestDetected callback;
     Context con;
     TextView blikCode;
     TextView timeLeft;
@@ -50,7 +51,7 @@ public class BlikTimer {
         timer.schedule(timerTask, 1000, 1000);
     }
 
-    public void stoptimertask(View v) {
+    public void stoptimertask() {
         if (timer != null) {
             timer.cancel();
             timer = null;
@@ -63,10 +64,14 @@ public class BlikTimer {
             public void run() {
                 handler.post(new Runnable() {
                     public void run() {
-                        new VolleyController().checkBlik(con,blikCode,timeLeft,progressBar);
+                        new VolleyController().checkBlik(con,blikCode,timeLeft,progressBar,callback);
                     }
                 });
             }
         };
+    }
+
+    public void setOnBlikRequestDetected(OnBlikRequestDetected callback) {
+        this.callback = callback;
     }
 }

@@ -22,6 +22,7 @@ public class BlikActivity extends AppCompatActivity {
     TextView blikCode;
     ProgressBar progressBar;
     TextView timeLeft;
+    VolleyController volleyController;
 
     BlikTimer blikTimer;
 
@@ -45,7 +46,14 @@ public class BlikActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_bar);
         timeLeft = findViewById(R.id.timer);
 
+        volleyController = new VolleyController();
+
+        volleyController.generateBlik(this);
         blikTimer = new BlikTimer(this,blikCode,timeLeft,progressBar);
+        blikTimer.setOnBlikRequestDetected(() -> {
+            blikTimer.stoptimertask();
+            finish();
+        });
         blikTimer.startTimer();
 
         btnCopy.setOnClickListener(new View.OnClickListener() {
@@ -57,5 +65,10 @@ public class BlikActivity extends AppCompatActivity {
                 Toast.makeText(BlikActivity.this, "Skopiowano kod", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 }

@@ -53,7 +53,7 @@ public class VolleyController {
         queue.add(stringRequest);
     }*/
 
-    public void checkBlik(Context con, TextView view, TextView timeLeft, ProgressBar bar) {
+    public void checkBlik(Context con, TextView view, TextView timeLeft, ProgressBar bar,OnBlikRequestDetected callback) {
         RequestQueue queue = Volley.newRequestQueue(con);
         String url ="http://192.168.56.1:8080/check-blik/1";
 
@@ -70,6 +70,9 @@ public class VolleyController {
                             } else if (blikData.expiration.before(new Date())) {
                                 updateBlik(con);
                             } else if (!Objects.equals(blikData.getRequested(), "")) {
+                                if (callback != null) {
+                                    callback.onRequestDetected();
+                                }
                                 Intent intent = new Intent(con, MainActivity.class);
                                 con.startActivity(intent);
                             } else {
